@@ -5,10 +5,10 @@
  * Данный файл содержит в себе определения основных
  * классов, используемых в демонстрационной программе
  */
-#ifndef SRC_CORE_PARSER_H_
-#define SRC_CORE_PARSER_H_
-//#define _GNU_SOURCE // надо добавлять если пользуемся getline но так как её
-//нет под win32 исп. my_getline
+#ifndef CORE_PARSER_H_
+#define CORE_PARSER_H_
+//  #define _GNU_SOURCE // надо добавлять если пользуемся getline но так как её
+//  нет под win32 исп. my_getline
 
 #include <ctype.h>
 #include <float.h>
@@ -160,6 +160,14 @@ void rotate(float *vert, struct object_s *object, int value, char direction);
 */
 void scale_object(float *vert, struct object_s *object, double base_scale,
                   double new_scale);
-
+/*!
+\brief Функция преобразования всех координат соответсвующей оси вершин для
+перемещение вдоль осей
+*/
+void move_object(float *vert, struct object_s *object, int value,
+                 char direction);
+/*!
+\brief Функция приведения всех координат вершин к диапазону от -1 до +1
+*/
 void normalize_vertices(float *vert, struct object_s *object);
-#endif  // SRC_CORE_PARSER_H_
+#endif  // CORE_PARSER_H_

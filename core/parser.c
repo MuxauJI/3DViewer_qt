@@ -19,6 +19,27 @@ void scale_object(float *vert, struct object_s *object, double base_scale,
   }
 }
 
+void move_object(float *vert, struct object_s *object, int value,
+                 char direction) {
+  switch (direction) {
+    case 'x':
+      for (unsigned int i = 0; i < object->vertex_limit; i += 3) {
+        vert[i] += (float)value;
+      }
+      break;
+    case 'y':
+      for (unsigned int i = 0; i < object->vertex_limit; i += 3) {
+        vert[i + 1] += (float)value;
+      }
+      break;
+    case 'z':
+      for (unsigned int i = 0; i < object->vertex_limit; i += 3) {
+        vert[i + 2] += (float)value;
+      }
+      break;
+  }
+}
+
 void rotate(float *vert, struct object_s *object, int value, char direction) {
   double angle = (double)value / 180 * M_PI;
   switch (direction) {
@@ -147,8 +168,8 @@ void print_vertices(float *vertices, unsigned int vertex_limit) {
 }
 
 void print_object(struct object_s object) {
-  // printf("v = %d, f = %d\n", object.vertex_count, object.facets_count);
-  /*printf("Vertices:\n");
+  printf("v = %d, f = %d\n", object.vertex_count, object.facets_count);
+  printf("Vertices:\n");
   for (unsigned int i = 0; i < object.vertex_count; i++) {
     printf("v[%d] = %f %f %f\n", i, object.vertices[i].point[0],
            object.vertices[i].point[1], object.vertices[i].point[2]);
@@ -160,7 +181,7 @@ void print_object(struct object_s object) {
       printf("%d ", object.facets[i].order[j]);
     }
     printf("\n");
-  }*/
+  }
   printf("Facets: count = %d, amount = %d, limit = %d\n", object.facets_count,
          object.facets_amount, object.facets_limit);
   printf("Vertices: count = %d, amount = %d, limit = %d\n", object.vertex_count,
@@ -199,39 +220,18 @@ int parse_facets(char *line, struct object_s *object) {
     object->facets[object->facets_amount].order = calloc(count, sizeof(int));
 
     char *part = s21_strtok(line, " ");
-    // int minus = 0;
     while (part != NULL) {
       if (sscanf(part, "%d", &i) == 1 && amount < count) {
-        // if(i < 0) minus = 1;
         object->facets[object->facets_amount].order[amount] = abs(i);
         amount++;
       }
       part = s21_strtok(NULL, " ");
-    } /*
-     if(minus == 1) {
-       int n = sizeof(object->facets[object->facets_amount].order) /
-     sizeof(object->facets[object->facets_amount].order[0]);
-       rvereseArray(object->facets[object->facets_amount].order, 0, n-1);
-     }*/
-
+    }
     object->facets_amount++;
   }
 
   return res;
 }
-/*
-void rvereseArray(int arr[], int start, int end)
-{
-  int temp;
-  while (start < end)
-  {
-    temp = arr[start];
-    arr[start] = arr[end];
-    arr[end] = temp;
-    start++;
-    end--;
-  }
-}*/
 
 int parse_vertices(char *line, struct object_s *object) {
   int res = 0;

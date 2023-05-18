@@ -1,9 +1,9 @@
-#include "parser.h"
+#include "../core/parser.h"
 
 int main() {
   int error = 0;
   struct object_s object = {0, 0, 0, 0, 0, 0, NULL, NULL, {0}};
-  char* path_to_file = "./obj/skull.obj";
+  char* path_to_file = "./obj/cube.obj";
 
   error = parse_file(path_to_file, &object);
   if (error != 0) {
@@ -12,10 +12,10 @@ int main() {
     printf("v = %d, f = %d\n", object.vertex_count, object.facets_count);
     print_object(object);
     float* vert = get_vertices(&object);
-    // print_vertices(vert, object.vertex_limit);
+    print_vertices(vert, object.vertex_limit);
 
     unsigned* face = get_facets(&object);
-    // print_facets(face, object.facets_limit);
+    print_facets(face, object.facets_limit);
 
     printf("Vertex limit = %d, Facets limit = %d\n", object.vertex_limit,
            object.facets_limit);

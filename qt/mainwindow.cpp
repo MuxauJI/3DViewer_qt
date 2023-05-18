@@ -60,3 +60,21 @@ void MainWindow::on_horizontalSlider_4_valueChanged(int value)
     viewer->scale_viewer(value);
 }
 
+
+void MainWindow::on_horizontalSlider_5_valueChanged(int value)
+{
+    viewer->move_viewer(value, 'x');
+}
+
+
+void MainWindow::on_horizontalSlider_6_valueChanged(int value)
+{
+    viewer->move_viewer(value, 'y');
+}
+
+
+void MainWindow::on_horizontalSlider_7_valueChanged(int value)
+{
+    viewer->move_viewer(value, 'z');
+}
+

@@ -26,10 +26,12 @@ public:
     char *filename_open;
     void init_facets();
     int rotation[3] = {0, 0, 0};
+    int position[3] = {0, 0, 0};
     double base_scale = 1;
     void update_frame();
     void rotate_viewer(int angle, char direction);
     void scale_viewer(int scale);
+    void move_viewer(int distance, char direction);
     struct object_s object = {0, 0, 0, 0, 0, 0, NULL, NULL, {0}};
     float * vert = NULL;
     unsigned int * facets = NULL;
