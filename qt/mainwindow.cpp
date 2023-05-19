@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     viewer = new Object_viewer();
     view = (QWidget *)(viewer);
     layout->addWidget(view);
+    ui->radioButton->setChecked(true);
     ui->openGLWidget->setLayout(layout);
 }
 
@@ -76,5 +77,19 @@ void MainWindow::on_horizontalSlider_6_valueChanged(int value)
 void MainWindow::on_horizontalSlider_7_valueChanged(int value)
 {
     viewer->move_viewer(value, 'z');
+}
+
+
+void MainWindow::on_radioButton_toggled(bool checked)
+{
+    viewer->projection = 1;
+    viewer->update_frame();
+}
+
+
+void MainWindow::on_radioButton_2_toggled(bool checked)
+{
+    viewer->projection = 0;
+    viewer->update_frame();
 }
 

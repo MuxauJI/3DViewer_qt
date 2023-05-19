@@ -33,6 +33,10 @@ private slots:
 
  void on_horizontalSlider_7_valueChanged(int value);
 
+ void on_radioButton_toggled(bool checked);
+
+ void on_radioButton_2_toggled(bool checked);
+
  private:
     Ui::MainWindow *ui;
     QGridLayout *layout;

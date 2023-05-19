@@ -27,6 +27,7 @@ public:
     void init_facets();
     int rotation[3] = {0, 0, 0};
     int position[3] = {0, 0, 0};
+    int projection = 0;
     double base_scale = 1;
     void update_frame();
     void rotate_viewer(int angle, char direction);

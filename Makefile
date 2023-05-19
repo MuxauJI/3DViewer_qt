@@ -65,6 +65,7 @@ gcov_report:
 
 clean: uninstall
 	@rm -rf ./html ./latex ./report ./core/*.o ./core/*.gcda ./core/*.gcno *.info ./tests/test ./tests/*.o CPPLINT.cfg cpplint.py
+	@rm -rf ./qt/*.o ./qt/moc_* ./qt/.qmake.stash ./qt/Makefile ./qt/3DViewer_test.pro.*
 
 clf:
 	clang-format -n --style=Google ./core/*.[ch] ./tests/*.[ch]
