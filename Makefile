@@ -65,17 +65,20 @@ gcov_report:
 
 clean: uninstall
 	@rm -rf ./html ./latex ./report ./core/*.o ./core/*.gcda ./core/*.gcno *.info ./tests/test ./tests/*.o CPPLINT.cfg cpplint.py
-	@rm -rf ./qt/*.o ./qt/moc_* ./qt/.qmake.stash ./qt/Makefile ./qt/3DViewer_test.pro.*
+	@rm -rf ./qt/*.o ./qt/moc_* ./qt/.qmake.stash ./qt/Makefile ./qt/3DViewer_test.pro.* ./qt/ui_*.h
 
 clf:
 	clang-format -n --style=Google ./core/*.[ch] ./tests/*.[ch]
+	clang-format -n --style=Google ./qt/*.cpp ./qt/*.h
 
 cpk:
 	cppcheck ./core/*.[ch] ./tests/*.[ch]
+	cppcheck --language=c++ ./qt/*.cpp ./qt/*.h
 
 cpl:
 	cp ./linters/CPPLINT.cfg ./linters/cpplint.py ./
 	python3 cpplint.py --extensions=c ./core/*.[ch] ./tests/*.[ch]
+	python3 cpplint.py --extensions=cpp ./qt/*.cpp ./qt/*.h
 	rm -rf CPPLINT.cfg cpplint.py
 
 style: clf cpk cpl
