@@ -7,15 +7,33 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   setlocale(LC_NUMERIC, "C");
   ui->setupUi(this);
+  this->setWindowTitle(APPLICATION_NAME);
+  QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
+  qDebug() << settings.value("Parallel", false).toBool();
+  qDebug() << settings.value("Central", false).toBool();
+
   layout = new QGridLayout();
   viewer = new Object_viewer();
+
+  ui->radioButton->setChecked(settings.value("Parallel", false).toBool());
+  ui->radioButton_2->setChecked(settings.value("Central", false).toBool());
+
+  if (settings.value("Parallel", false).toBool()) viewer->projection = 1;
+  if (settings.value("Central", false).toBool()) viewer->projection = 0;
   view = (QWidget *)(viewer);
   layout->addWidget(view);
-  ui->radioButton->setChecked(true);
+  // ui->radioButton->setChecked(true);
   ui->openGLWidget->setLayout(layout);
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+  QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
+  settings.setValue("Parallel", ui->radioButton->isChecked());
+  settings.setValue("Central", ui->radioButton_2->isChecked());
+
+  settings.sync();
+  delete ui;
+}
 
 void MainWindow::on_pushButton_clicked() {
   QString fileName_open;

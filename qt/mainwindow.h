@@ -5,8 +5,14 @@
 #include <QFileDialog>
 #include <QGridLayout>
 #include <QMainWindow>
+#include <QSettings>
 
 #include "object_viewer.h"
+
+#define ORGANIZATION_NAME "School21"
+#define ORGANIZATION_DOMAIN "www.21-school.ru"
+#define APPLICATION_NAME "3DViewer"
+#define PROJECTION "PROJECTION"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
