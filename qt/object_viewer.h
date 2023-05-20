@@ -28,9 +28,10 @@ class Object_viewer : QOpenGLWidget, protected QOpenGLFunctions {
   int position[3] = {0, 0, 0};
   int projection = 0;
   double base_scale = 1;
+  double new_scale = 1;
   void update_frame();
   void rotate_viewer(int angle, char direction);
-  void scale_viewer(int scale);
+  void scale_viewer(double scale);
   void move_viewer(int distance, char direction);
   struct object_s object = {0, 0, 0, 0, 0, 0, NULL, NULL, {0}};
   float *vert = NULL;

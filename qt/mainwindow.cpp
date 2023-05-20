@@ -8,34 +8,46 @@ MainWindow::MainWindow(QWidget *parent)
   setlocale(LC_NUMERIC, "C");
   ui->setupUi(this);
   this->setWindowTitle(APPLICATION_NAME);
-  QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
-  qDebug() << settings.value("Parallel", false).toBool();
-  qDebug() << settings.value("Central", false).toBool();
+
 
   layout = new QGridLayout();
   viewer = new Object_viewer();
 
+  loadSettings();
+
+  view = (QWidget *)(viewer);
+  layout->addWidget(view);
+  ui->openGLWidget->setLayout(layout);
+
+  //connect(this, &viewer::mouseMoveEvent, r, SLOT(&MainWindow::on_horizontalSlider_valueChanged()));
+}
+
+void MainWindow::loadSettings() {
+  QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
+
   ui->radioButton->setChecked(settings.value("Parallel", false).toBool());
   ui->radioButton_2->setChecked(settings.value("Central", false).toBool());
 
-  if (settings.value("Parallel", false).toBool()) viewer->projection = 1;
-  if (settings.value("Central", false).toBool()) viewer->projection = 0;
-  view = (QWidget *)(viewer);
-  layout->addWidget(view);
-  // ui->radioButton->setChecked(true);
-  ui->openGLWidget->setLayout(layout);
+  viewer->base_scale = 1;
+  ui->horizontalSlider_4->setValue((settings.value("Scale", 1.00).toDouble() - 1) * 100);
+
 }
 
-MainWindow::~MainWindow() {
+void MainWindow::saveSettings() {
   QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
   settings.setValue("Parallel", ui->radioButton->isChecked());
   settings.setValue("Central", ui->radioButton_2->isChecked());
+  settings.setValue("Scale", (1 + ((double)ui->horizontalSlider_4->value() / 100)));
 
   settings.sync();
+}
+MainWindow::~MainWindow() {
+  saveSettings();
   delete ui;
 }
 
 void MainWindow::on_pushButton_clicked() {
+  saveSettings(); //  сохраняем настройки перед открытием файла
   QString fileName_open;
   fileName_open =
       QFileDialog::getOpenFileName(this, "Open file ...", "~/", "*.obj",
@@ -45,6 +57,7 @@ void MainWindow::on_pushButton_clicked() {
   } else {
     QByteArray tmp = fileName_open.toLocal8Bit();
     viewer->filename_open = tmp.data();
+    loadSettings(); //  загружаем ранее сохраненные настройки для нового файла
     viewer->init_facets();
   }
 }
@@ -62,7 +75,8 @@ void MainWindow::on_horizontalSlider_3_valueChanged(int value) {
 }
 
 void MainWindow::on_horizontalSlider_4_valueChanged(int value) {
-  viewer->scale_viewer(value);
+  viewer->new_scale = 1 + (double)value / 100;
+  viewer->scale_viewer(viewer->new_scale);
 }
 
 void MainWindow::on_horizontalSlider_5_valueChanged(int value) {

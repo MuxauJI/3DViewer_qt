@@ -26,10 +26,14 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
+  void loadSettings();
+  void saveSettings();
+ public slots:
+  void on_horizontalSlider_valueChanged(int value);
 
  private slots:
   void on_pushButton_clicked();
-  void on_horizontalSlider_valueChanged(int value);
+
   void on_horizontalSlider_2_valueChanged(int value);
   void on_horizontalSlider_3_valueChanged(int value);
   void on_horizontalSlider_4_valueChanged(int value);

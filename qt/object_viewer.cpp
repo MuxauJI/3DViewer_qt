@@ -20,6 +20,7 @@ void Object_viewer::init_facets() {
     vert = get_vertices(&object);
     // normalize_vertices(vert, &object);
     // print_object(object);
+    scale_viewer(new_scale);
     update_frame();
   } else {
     printf("%s", view_error(error));
@@ -76,11 +77,10 @@ void Object_viewer::rotate_viewer(int angle, char direction) {
   update_frame();
 }
 
-void Object_viewer::scale_viewer(int scale) {
-  double new_scale = 1 + (double)scale / 100;
-  scale_object(vert, &object, base_scale, new_scale);
+void Object_viewer::scale_viewer(double scale) {
+  scale_object(vert, &object, base_scale, scale);
   update_frame();
-  base_scale = new_scale;
+  base_scale = scale;
 }
 
 void Object_viewer::move_viewer(int distance, char direction) {
@@ -108,6 +108,7 @@ void Object_viewer::mouseMoveEvent(QMouseEvent *event) {
     rotate(vert, &object, dx, 'y');
     rotation[0] += dy;
     rotation[1] += dx;
+    //emit on_horizontalSlider_valueChanged(rotation[0]);
   }
 
   lastPos = event->pos();
