@@ -29,11 +29,11 @@ class MainWindow : public QMainWindow {
   void loadSettings();
   void saveSettings();
  public slots:
-  void on_horizontalSlider_valueChanged(int value);
+  void change_slider_position(int val, char dir);
 
  private slots:
   void on_pushButton_clicked();
-
+  void on_horizontalSlider_valueChanged(int value);
   void on_horizontalSlider_2_valueChanged(int value);
   void on_horizontalSlider_3_valueChanged(int value);
   void on_horizontalSlider_4_valueChanged(int value);

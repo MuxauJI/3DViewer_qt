@@ -5,19 +5,23 @@ extern "C" {
 #include "../core/parser.h"
 }
 #include <QMouseEvent>
+#include <QObject>
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
 #include <QWidget>
 
-class Object_viewer : QOpenGLWidget, protected QOpenGLFunctions {
+class Object_viewer : public QOpenGLWidget, protected QOpenGLFunctions {
   Q_OBJECT
+ public slots:
+  void mousePressEvent(QMouseEvent *event);
+  void mouseMoveEvent(QMouseEvent *event);
+ signals:
+  void change_rotation(int rotation, char direction);
 
  protected:
   void initializeGL();
   void paintGL();
   void resizeGL(int width, int height);
-  void mousePressEvent(QMouseEvent *event);
-  void mouseMoveEvent(QMouseEvent *event);
 
  public:
   Object_viewer();

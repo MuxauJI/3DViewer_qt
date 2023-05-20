@@ -9,17 +9,17 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
   this->setWindowTitle(APPLICATION_NAME);
 
-
   layout = new QGridLayout();
   viewer = new Object_viewer();
+
+  connect(viewer, SIGNAL(change_rotation(int, char)), this,
+          SLOT(change_slider_position(int, char)));
 
   loadSettings();
 
   view = (QWidget *)(viewer);
   layout->addWidget(view);
   ui->openGLWidget->setLayout(layout);
-
-  //connect(this, &viewer::mouseMoveEvent, r, SLOT(&MainWindow::on_horizontalSlider_valueChanged()));
 }
 
 void MainWindow::loadSettings() {
@@ -29,15 +29,16 @@ void MainWindow::loadSettings() {
   ui->radioButton_2->setChecked(settings.value("Central", false).toBool());
 
   viewer->base_scale = 1;
-  ui->horizontalSlider_4->setValue((settings.value("Scale", 1.00).toDouble() - 1) * 100);
-
+  ui->horizontalSlider_4->setValue(
+      (settings.value("Scale", 1.00).toDouble() - 1) * 100);
 }
 
 void MainWindow::saveSettings() {
   QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
   settings.setValue("Parallel", ui->radioButton->isChecked());
   settings.setValue("Central", ui->radioButton_2->isChecked());
-  settings.setValue("Scale", (1 + ((double)ui->horizontalSlider_4->value() / 100)));
+  settings.setValue("Scale",
+                    (1 + ((double)ui->horizontalSlider_4->value() / 100)));
 
   settings.sync();
 }
@@ -47,7 +48,7 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_pushButton_clicked() {
-  saveSettings(); //  сохраняем настройки перед открытием файла
+  saveSettings();  //  сохраняем настройки перед открытием файла
   QString fileName_open;
   fileName_open =
       QFileDialog::getOpenFileName(this, "Open file ...", "~/", "*.obj",
@@ -57,9 +58,16 @@ void MainWindow::on_pushButton_clicked() {
   } else {
     QByteArray tmp = fileName_open.toLocal8Bit();
     viewer->filename_open = tmp.data();
-    loadSettings(); //  загружаем ранее сохраненные настройки для нового файла
+    loadSettings();  //  загружаем ранее сохраненные настройки для нового файла
     viewer->init_facets();
   }
+}
+
+void MainWindow::change_slider_position(int val, char dir) {
+  int degrees = val % 360 + (val < 0 ? 360 : 0);
+  // qDebug() << degrees;
+  if (dir == 'x') ui->horizontalSlider->setValue(degrees);
+  if (dir == 'y') ui->horizontalSlider_2->setValue(degrees);
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int value) {

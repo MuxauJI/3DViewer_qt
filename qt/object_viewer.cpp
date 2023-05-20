@@ -1,6 +1,13 @@
 #include "object_viewer.h"
 
-Object_viewer::Object_viewer() { ; }
+Object_viewer::Object_viewer() {
+  // connect(mouseMoveEvent, SIGNAL(clicked()), this,
+  // SIGNAL(MainWindow::on_horizontalSlider_valueChanged(int)));
+  //    connect(this,
+  //            SIGNAL(change_rotation(int)),
+  //            parent(),
+  //            SLOT(on_horizontalSlider_valueChanged(int)));
+}
 
 //  деструктор освобождаем выделенную память
 Object_viewer::~Object_viewer() { object_viewer_free(); }
@@ -108,7 +115,9 @@ void Object_viewer::mouseMoveEvent(QMouseEvent *event) {
     rotate(vert, &object, dx, 'y');
     rotation[0] += dy;
     rotation[1] += dx;
-    //emit on_horizontalSlider_valueChanged(rotation[0]);
+    emit change_rotation(rotation[0], 'x');
+    emit change_rotation(rotation[1], 'y');
+    // emit change_rotation(rotation[1]);
   }
 
   lastPos = event->pos();
