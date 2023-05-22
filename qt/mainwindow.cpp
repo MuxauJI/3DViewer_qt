@@ -38,6 +38,7 @@ void MainWindow::loadSettings() {
   viewer->base_scale = 1;
   ui->horizontalSlider_4->setValue(
       (settings.value("Scale", 1.00).toDouble() - 1) * 100);
+  ui->horizontalSlider_8->setValue(settings.value("LineWidth", 1).toInt());
 }
 
 void MainWindow::saveSettings() {
@@ -47,6 +48,7 @@ void MainWindow::saveSettings() {
   settings.setValue("Scale",
                     (1 + ((double)ui->horizontalSlider_4->value() / 100)));
 
+  settings.setValue("LineWidth", ui->horizontalSlider_8->value());
   settings.sync();
 }
 MainWindow::~MainWindow() {

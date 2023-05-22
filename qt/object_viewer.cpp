@@ -1,13 +1,6 @@
 #include "object_viewer.h"
 
-Object_viewer::Object_viewer() {
-  // connect(mouseMoveEvent, SIGNAL(clicked()), this,
-  // SIGNAL(MainWindow::on_horizontalSlider_valueChanged(int)));
-  //    connect(this,
-  //            SIGNAL(change_rotation(int)),
-  //            parent(),
-  //            SLOT(on_horizontalSlider_valueChanged(int)));
-}
+Object_viewer::Object_viewer() { ; }
 
 //  деструктор освобождаем выделенную память
 Object_viewer::~Object_viewer() { object_viewer_free(); }
@@ -67,10 +60,6 @@ void Object_viewer::paintGL() {
   // glOrtho(object.minMax[0], object.minMax[1], object.minMax[2],
   // object.minMax[3], -object.minMax[4], object.minMax[5]);
   // glOrtho(-1,1,-1,1,-1,1);
-
-
-
-
 
   // draw
   glEnableClientState(GL_VERTEX_ARRAY);
