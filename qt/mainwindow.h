@@ -48,8 +48,11 @@ class MainWindow : public QMainWindow {
 
   void on_radioButton_2_toggled();
 
- private:
+  void on_horizontalSlider_8_valueChanged(int value);
+
+  private:
   Ui::MainWindow *ui;
+  void resizeEvent(QResizeEvent*);
   QGridLayout *layout;
   QWidget *view;
   Object_viewer *viewer;

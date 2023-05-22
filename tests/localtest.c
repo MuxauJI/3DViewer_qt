@@ -3,7 +3,7 @@
 int main() {
   int error = 0;
   struct object_s object = {0, 0, 0, 0, 0, 0, NULL, NULL, {0}};
-  char* path_to_file = "./obj/cube.obj";
+  char* path_to_file = "./obj/glock.obj";
 
   error = parse_file(path_to_file, &object);
   if (error != 0) {

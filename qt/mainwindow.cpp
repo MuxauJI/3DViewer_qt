@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   setlocale(LC_NUMERIC, "C");
   ui->setupUi(this);
+
+  ui->horizontalLayoutWidget->resize(this->size());
   this->setWindowTitle(APPLICATION_NAME);
 
   layout = new QGridLayout();
@@ -20,6 +22,11 @@ MainWindow::MainWindow(QWidget *parent)
   view = (QWidget *)(viewer);
   layout->addWidget(view);
   ui->openGLWidget->setLayout(layout);
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+  ui->horizontalLayoutWidget->resize(this->size());
 }
 
 void MainWindow::loadSettings() {
@@ -108,3 +115,9 @@ void MainWindow::on_radioButton_2_toggled() {
   viewer->projection = 0;
   viewer->update_frame();
 }
+
+void MainWindow::on_horizontalSlider_8_valueChanged(int value)
+{
+  viewer->change_line_width(value);
+}
+

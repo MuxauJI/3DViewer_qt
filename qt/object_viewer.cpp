@@ -50,6 +50,10 @@ void Object_viewer::paintGL() {
   double *p = get_projection(object);
   // print_object(object);
 
+  // line width
+  glEnable(GL_LINE_WIDTH);
+  glLineWidth(line_width);
+
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   if (projection) {
@@ -64,12 +68,21 @@ void Object_viewer::paintGL() {
   // object.minMax[3], -object.minMax[4], object.minMax[5]);
   // glOrtho(-1,1,-1,1,-1,1);
 
+
+
+
+
   // draw
   glEnableClientState(GL_VERTEX_ARRAY);
   glVertexPointer(3, GL_FLOAT, 0, vert);
   glDrawElements(GL_LINES, object.facets_limit, GL_UNSIGNED_INT, facets);
   glDisableClientState(GL_VERTEX_ARRAY);
   free(p);
+}
+
+void Object_viewer::change_line_width(int width) {
+  line_width = width;
+  update_frame();
 }
 
 void Object_viewer::rotate_viewer(int angle, char direction) {
@@ -117,7 +130,6 @@ void Object_viewer::mouseMoveEvent(QMouseEvent *event) {
     rotation[1] += dx;
     emit change_rotation(rotation[0], 'x');
     emit change_rotation(rotation[1], 'y');
-    // emit change_rotation(rotation[1]);
   }
 
   lastPos = event->pos();

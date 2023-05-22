@@ -8,6 +8,7 @@ char *view_error(int i) {
   if (i == 1) error = "Error open file";
   if (i == 2) error = "Error parse vertices";
   if (i == 3) error = "Error parse facets";
+  if (i == 4) error = "Error calloc";
   return error;
 }
 
@@ -280,7 +281,7 @@ int parse_file(const char *file_path, struct object_s *object) {
                                                    sizeof(struct vertices_s));
     object->facets = (struct facets_s *)calloc(object->facets_count,
                                                sizeof(struct facets_s));
-
+    if(object->vertices == NULL || object->facets == NULL) res = 4;
     fseek(fp, 0, SEEK_SET);
 
     while ((read = my_getline(&line, &len, fp)) != -1 && res == 0) {
@@ -317,6 +318,8 @@ void free_object(struct object_s *object) {
   object->vertex_amount = object->vertex_count = object->vertex_limit = 0;
   object->minMax[0] = object->minMax[2] = object->minMax[4] = DBL_MAX;
   object->minMax[1] = object->minMax[3] = object->minMax[5] = -DBL_MAX;
+  object->facets = NULL;
+  object->vertices = NULL;
 }
 
 char *s21_strtok(char *str, const char *delim) {

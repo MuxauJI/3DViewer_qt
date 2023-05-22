@@ -31,9 +31,11 @@ class Object_viewer : public QOpenGLWidget, protected QOpenGLFunctions {
   int rotation[3] = {0, 0, 0};
   int position[3] = {0, 0, 0};
   int projection = 0;
+  int line_width = 1;
   double base_scale = 1;
   double new_scale = 1;
   void update_frame();
+  void change_line_width(int);
   void rotate_viewer(int angle, char direction);
   void scale_viewer(double scale);
   void move_viewer(int distance, char direction);
