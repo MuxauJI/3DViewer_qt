@@ -48,7 +48,7 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>290</y>
+          <y>293</y>
           <width>16</width>
           <height>16</height>
          </rect>
@@ -61,9 +61,9 @@
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>135</y>
+          <y>130</y>
           <width>160</width>
-          <height>16</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="minimum">
@@ -83,7 +83,7 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>310</y>
+          <y>313</y>
           <width>16</width>
           <height>16</height>
          </rect>
@@ -150,7 +150,7 @@
           <x>30</x>
           <y>310</y>
           <width>160</width>
-          <height>16</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="minimum">
@@ -169,7 +169,7 @@
           <x>30</x>
           <y>220</y>
           <width>160</width>
-          <height>16</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="minimum">
@@ -188,7 +188,7 @@
           <x>30</x>
           <y>180</y>
           <width>160</width>
-          <height>16</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="minimum">
@@ -220,7 +220,7 @@
           <x>30</x>
           <y>290</y>
           <width>160</width>
-          <height>16</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="minimum">
@@ -265,7 +265,7 @@
           <x>30</x>
           <y>270</y>
           <width>160</width>
-          <height>16</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="minimum">
@@ -297,7 +297,7 @@
           <x>30</x>
           <y>200</y>
           <width>160</width>
-          <height>16</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="minimum">
@@ -327,7 +327,7 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>270</y>
+          <y>273</y>
           <width>21</width>
           <height>16</height>
          </rect>
