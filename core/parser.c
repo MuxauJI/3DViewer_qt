@@ -281,7 +281,7 @@ int parse_file(const char *file_path, struct object_s *object) {
                                                    sizeof(struct vertices_s));
     object->facets = (struct facets_s *)calloc(object->facets_count,
                                                sizeof(struct facets_s));
-    if(object->vertices == NULL || object->facets == NULL) res = 4;
+    if (object->vertices == NULL || object->facets == NULL) res = 4;
     fseek(fp, 0, SEEK_SET);
 
     while ((read = my_getline(&line, &len, fp)) != -1 && res == 0) {

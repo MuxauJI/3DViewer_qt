@@ -24,8 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
   ui->openGLWidget->setLayout(layout);
 }
 
-void MainWindow::resizeEvent(QResizeEvent* event)
-{
+void MainWindow::resizeEvent(QResizeEvent *event) {
   ui->horizontalLayoutWidget->resize(this->size());
 }
 
@@ -118,8 +117,6 @@ void MainWindow::on_radioButton_2_toggled() {
   viewer->update_frame();
 }
 
-void MainWindow::on_horizontalSlider_8_valueChanged(int value)
-{
+void MainWindow::on_horizontalSlider_8_valueChanged(int value) {
   viewer->change_line_width(value);
 }
-

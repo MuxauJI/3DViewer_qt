@@ -37,22 +37,16 @@ class MainWindow : public QMainWindow {
   void on_horizontalSlider_2_valueChanged(int value);
   void on_horizontalSlider_3_valueChanged(int value);
   void on_horizontalSlider_4_valueChanged(int value);
-
   void on_horizontalSlider_5_valueChanged(int value);
-
   void on_horizontalSlider_6_valueChanged(int value);
-
   void on_horizontalSlider_7_valueChanged(int value);
-
   void on_radioButton_toggled();
-
   void on_radioButton_2_toggled();
-
   void on_horizontalSlider_8_valueChanged(int value);
 
-  private:
+ private:
   Ui::MainWindow *ui;
-  void resizeEvent(QResizeEvent*);
+  void resizeEvent(QResizeEvent *);
   QGridLayout *layout;
   QWidget *view;
   Object_viewer *viewer;
