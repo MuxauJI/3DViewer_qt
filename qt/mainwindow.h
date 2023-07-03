@@ -32,17 +32,17 @@ class MainWindow : public QMainWindow {
   void change_slider_position(int val, char dir);
 
  private slots:
-  void on_pushButton_clicked();
-  void on_horizontalSlider_valueChanged(int value);
-  void on_horizontalSlider_2_valueChanged(int value);
-  void on_horizontalSlider_3_valueChanged(int value);
-  void on_horizontalSlider_4_valueChanged(int value);
-  void on_horizontalSlider_5_valueChanged(int value);
-  void on_horizontalSlider_6_valueChanged(int value);
-  void on_horizontalSlider_7_valueChanged(int value);
-  void on_radioButton_toggled();
-  void on_radioButton_2_toggled();
-  void on_horizontalSlider_8_valueChanged(int value);
+  void on_open_button_clicked();
+  void on_rotation_x_slider_valueChanged(int value);
+  void on_rotation_y_slider_valueChanged(int value);
+  void on_rotation_z_slider_valueChanged(int value);
+  void on_scale_slider_valueChanged(int value);
+  void on_move_x_slider_valueChanged(int value);
+  void on_move_y_slider_valueChanged(int value);
+  void on_move_z_slider_valueChanged(int value);
+  void on_parallel_rbutton_toggled();
+  void on_central_rbutton_toggled();
+  void on_line_w_slider_valueChanged(int value);
 
  private:
   Ui::MainWindow *ui;

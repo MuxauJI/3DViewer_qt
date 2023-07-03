@@ -218,7 +218,7 @@ int parse_facets(char *line, struct object_s *object) {
   if (count == 0) res = 3;
 
   if (res == 0) {
-    object->facets[object->facets_amount].order = calloc(count, sizeof(int));
+    object->facets[object->facets_amount].order = calloc(count, sizeof(unsigned int));
 
     char *part = s21_strtok(line, " ");
     while (part != NULL) {
@@ -256,11 +256,10 @@ int parse_file(const char *file_path, struct object_s *object) {
   FILE *fp;
   char *line = NULL;
   size_t len = 0;
-  ssize_t read;
 
   fp = fopen(file_path, "r");
   if (fp != NULL) {
-    while ((read = my_getline(&line, &len, fp)) != -1 && res == 0) {
+    while ((my_getline(&line, &len, fp)) != -1 && res == 0) {
       if (line[0] == 'v' && line[1] == ' ')
         object->vertex_count++;
       else if (line[0] == 'f' && line[1] == ' ')
@@ -284,7 +283,7 @@ int parse_file(const char *file_path, struct object_s *object) {
     if (object->vertices == NULL || object->facets == NULL) res = 4;
     fseek(fp, 0, SEEK_SET);
 
-    while ((read = my_getline(&line, &len, fp)) != -1 && res == 0) {
+    while ((my_getline(&line, &len, fp)) != -1 && res == 0) {
       if (line[0] == 'v' && line[1] == ' ') {
         res = parse_vertices(line, object);
       } else if (line[0] == 'f' && line[1] == ' ') {
