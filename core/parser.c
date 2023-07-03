@@ -218,7 +218,8 @@ int parse_facets(char *line, struct object_s *object) {
   if (count == 0) res = 3;
 
   if (res == 0) {
-    object->facets[object->facets_amount].order = calloc(count, sizeof(unsigned int));
+    object->facets[object->facets_amount].order =
+        calloc(count, sizeof(unsigned int));
 
     char *part = s21_strtok(line, " ");
     while (part != NULL) {

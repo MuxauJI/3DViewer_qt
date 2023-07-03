@@ -14,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
   layout = new QGridLayout();
   viewer = new Object_viewer();
 
-  connect(viewer, SIGNAL(change_rotation(int,char)), this,
-          SLOT(change_slider_position(int,char)));
+  connect(viewer, SIGNAL(change_rotation(int, char)), this,
+          SLOT(change_slider_position(int, char)));
 
   loadSettings();
 
@@ -35,8 +35,8 @@ void MainWindow::loadSettings() {
   ui->central_rbutton->setChecked(settings.value("Central", false).toBool());
 
   viewer->base_scale = 1;
-  ui->scale_slider->setValue(
-      (settings.value("Scale", 1.00).toDouble() - 1) * 100);
+  ui->scale_slider->setValue((settings.value("Scale", 1.00).toDouble() - 1) *
+                             100);
   ui->line_w_slider->setValue(settings.value("LineWidth", 1).toInt());
 }
 
@@ -44,8 +44,7 @@ void MainWindow::saveSettings() {
   QSettings settings(ORGANIZATION_NAME, APPLICATION_NAME);
   settings.setValue("Parallel", ui->parallel_rbutton->isChecked());
   settings.setValue("Central", ui->central_rbutton->isChecked());
-  settings.setValue("Scale",
-                    (1 + ((double)ui->scale_slider->value() / 100)));
+  settings.setValue("Scale", (1 + ((double)ui->scale_slider->value() / 100)));
 
   settings.setValue("LineWidth", ui->line_w_slider->value());
   settings.sync();
