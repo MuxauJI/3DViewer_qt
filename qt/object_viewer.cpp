@@ -119,6 +119,13 @@ void Object_viewer::mouseMoveEvent(QMouseEvent *event) {
     rotation[1] += dx;
     emit change_rotation(rotation[0], 'x');
     emit change_rotation(rotation[1], 'y');
+  } else if (event->buttons() & Qt::RightButton) {
+    /*move_object(vert, &object, dx, 'x');
+    position[0] += dx;
+    move_object(vert, &object, dy, 'y');
+    position[1] += dy;*/
+
+    qDebug() << dx << dy;
   }
 
   lastPos = event->pos();

@@ -26,7 +26,7 @@ uninstall:
 ifeq ($(OS), Darwin)
 	rm -rf ./build/$(BIN_FILE).app ./build/$(BIN_FILE).tar.gz
 else
-	rm -rf ./build/$(BIN_FILE) ./build/$(BIN_FILE).tar.gz
+	rm -rf ./build/$(BIN_FILE) ./build/$(BIN_FILE).tar.gz ./build/$(BIN_FILE).exe
 endif
 
 dvi:
@@ -66,7 +66,7 @@ gcov_report:
 clean: uninstall
 	@rm -rf ./html ./latex ./report ./core/*.o ./core/*.gcda ./core/*.gcno *.info ./tests/test ./tests/*.o CPPLINT.cfg cpplint.py
 	@rm -rf ./qt/*.o ./qt/moc_* ./qt/.qmake.stash ./qt/Makefile ./qt/3DViewer_test.pro.* ./qt/ui_*.h
-
+	@rm -rf ./qt/debug ./qt/Makefile.* ./qt/.qtc_clangd/
 clf:
 	clang-format -n --style=Google ./core/*.[ch] ./tests/*.[ch]
 	clang-format -n --style=Google ./qt/*.cpp ./qt/*.h
